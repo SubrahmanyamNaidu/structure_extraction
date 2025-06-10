@@ -1,0 +1,235 @@
+{
+  "tables": {
+    "departments": {
+      "columns": {
+        "dept_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "unique": false,
+          "primary_key": true
+        },
+        "dept_name": {
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": true,
+          "primary_key": false
+        },
+        "budget": {
+          "type": "DECIMAL(10, 2)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "dept_id"
+      ],
+      "foreign_keys": {},
+      "unique_constraints": [
+        [
+          "dept_name"
+        ]
+      ],
+      "indexes": [
+        {
+          "name": "dept_name",
+          "columns": [
+            "dept_name"
+          ],
+          "unique": true
+        }
+      ],
+      "check_constraints": []
+    },
+    "employee_projects": {
+      "columns": {
+        "emp_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": true
+        },
+        "project_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": true
+        },
+        "role": {
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "emp_id",
+        "project_id"
+      ],
+      "foreign_keys": {
+        "emp_id": {
+          "references": "employees.emp_id"
+        },
+        "project_id": {
+          "references": "projects.project_id"
+        }
+      },
+      "unique_constraints": [],
+      "indexes": [
+        {
+          "name": "project_id",
+          "columns": [
+            "project_id"
+          ],
+          "unique": false
+        }
+      ],
+      "check_constraints": []
+    },
+    "employees": {
+      "columns": {
+        "emp_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "unique": false,
+          "primary_key": true
+        },
+        "first_name": {
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "last_name": {
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "email": {
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": true,
+          "primary_key": false
+        },
+        "hire_date": {
+          "type": "DATE",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "salary": {
+          "type": "DECIMAL(10, 2)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "dept_id": {
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "emp_id"
+      ],
+      "foreign_keys": {
+        "dept_id": {
+          "references": "departments.dept_id"
+        }
+      },
+      "unique_constraints": [
+        [
+          "email"
+        ]
+      ],
+      "indexes": [
+        {
+          "name": "dept_id",
+          "columns": [
+            "dept_id"
+          ],
+          "unique": false
+        },
+        {
+          "name": "email",
+          "columns": [
+            "email"
+          ],
+          "unique": true
+        }
+      ],
+      "check_constraints": []
+    },
+    "projects": {
+      "columns": {
+        "project_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "unique": false,
+          "primary_key": true
+        },
+        "project_name": {
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "start_date": {
+          "type": "DATE",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "end_date": {
+          "type": "DATE",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "project_id"
+      ],
+      "foreign_keys": {},
+      "unique_constraints": [],
+      "indexes": [],
+      "check_constraints": []
+    }
+  }
+}

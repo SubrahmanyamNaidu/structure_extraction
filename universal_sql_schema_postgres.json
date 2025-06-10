@@ -1,0 +1,226 @@
+{
+  "tables": {
+    "departments": {
+      "columns": {
+        "dept_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "nextval('departments_dept_id_seq'::regclass)",
+          "auto_increment": true,
+          "unique": false,
+          "primary_key": true
+        },
+        "dept_name": {
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": true,
+          "primary_key": false
+        },
+        "budget": {
+          "type": "NUMERIC",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "dept_id"
+      ],
+      "foreign_keys": {},
+      "unique_constraints": [
+        [
+          "dept_name"
+        ]
+      ],
+      "indexes": [
+        {
+          "name": "departments_dept_name_key",
+          "columns": [
+            "dept_name"
+          ],
+          "unique": true
+        }
+      ],
+      "check_constraints": [
+        "CHECK ((budget >= (0)::numeric))"
+      ]
+    },
+    "employees": {
+      "columns": {
+        "emp_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "nextval('employees_emp_id_seq'::regclass)",
+          "auto_increment": true,
+          "unique": false,
+          "primary_key": true
+        },
+        "first_name": {
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "last_name": {
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "email": {
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": true,
+          "primary_key": false
+        },
+        "hire_date": {
+          "type": "DATE",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "salary": {
+          "type": "NUMERIC",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "dept_id": {
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "emp_id"
+      ],
+      "foreign_keys": {
+        "dept_id": {
+          "references": "departments.dept_id"
+        }
+      },
+      "unique_constraints": [
+        [
+          "email"
+        ]
+      ],
+      "indexes": [
+        {
+          "name": "employees_email_key",
+          "columns": [
+            "email"
+          ],
+          "unique": true
+        }
+      ],
+      "check_constraints": [
+        "CHECK ((salary > (0)::numeric))"
+      ]
+    },
+    "employee_projects": {
+      "columns": {
+        "emp_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": true
+        },
+        "project_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": true
+        },
+        "role": {
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "emp_id",
+        "project_id"
+      ],
+      "foreign_keys": {
+        "emp_id": {
+          "references": "employees.emp_id"
+        },
+        "project_id": {
+          "references": "projects.project_id"
+        }
+      },
+      "unique_constraints": [],
+      "indexes": [],
+      "check_constraints": []
+    },
+    "projects": {
+      "columns": {
+        "project_id": {
+          "type": "INTEGER",
+          "nullable": false,
+          "default": "nextval('projects_project_id_seq'::regclass)",
+          "auto_increment": true,
+          "unique": false,
+          "primary_key": true
+        },
+        "project_name": {
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "start_date": {
+          "type": "DATE",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        },
+        "end_date": {
+          "type": "DATE",
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "unique": false,
+          "primary_key": false
+        }
+      },
+      "primary_key": [
+        "project_id"
+      ],
+      "foreign_keys": {},
+      "unique_constraints": [],
+      "indexes": [],
+      "check_constraints": [
+        "CHECK (((end_date IS NULL) OR (end_date >= start_date)))"
+      ]
+    }
+  }
+}
